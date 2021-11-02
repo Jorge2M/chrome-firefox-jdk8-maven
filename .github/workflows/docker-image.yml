@@ -24,4 +24,4 @@ jobs:
       run: docker build . --file Dockerfile --tag jorge2m/chrome-firefox-openjdk8:$(date +%s)
       
     - name: Docker Push
-      run: docker push jorge2m/chrome-firefox-openjdk8
+      run: docker push jorge2m/chrome-firefox-openjdk8:$(date +%s)
