@@ -23,6 +23,10 @@ jobs:
     - name: Set current date as env variable
       run: echo "NOW=$(date +%s)" >> $GITHUB_ENV
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag jorge2m/chrome-firefox-openjdk8:$NOW
+      run: |
+        docker build . --file Dockerfile --tag jorge2m/chrome-firefox-openjdk8:$NOW
+        docker tag jorge2m/chrome-firefox-openjdk8:$NOW jorge2m/chrome-firefox-openjdk8:latest
     - name: Docker Push
-      run: docker push jorge2m/chrome-firefox-openjdk8:$NOW
+      run: |
+        docker push jorge2m/chrome-firefox-openjdk8:$NOW
+        docker push jorge2m/chrome-firefox-openjdk8:latest
