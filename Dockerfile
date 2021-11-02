@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM maven:3.8.3-jdk-8
 
 RUN apt-get update -y \
 	&& apt -y install locales \
