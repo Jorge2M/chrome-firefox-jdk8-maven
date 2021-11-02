@@ -18,11 +18,11 @@ jobs:
       env:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-        TAG: $(date +%s)
       run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Set current date as env variable
+      run: echo "NOW::$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag jorge2m/chrome-firefox-openjdk8:$TAG
-      
+      run: docker build . --file Dockerfile --tag jorge2m/chrome-firefox-openjdk8:$NOW
     - name: Docker Push
-      run: docker push jorge2m/chrome-firefox-openjdk8:$TAG
+      run: docker push jorge2m/chrome-firefox-openjdk8:$NOW
