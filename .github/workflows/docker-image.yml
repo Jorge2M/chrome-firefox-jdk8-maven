@@ -25,7 +25,7 @@ jobs:
     - name: Build the Docker image
       run: |
         docker build . --file Dockerfile --tag jorge2m/chrome-firefox-jdk8-maven:$NOW
-        docker tag jorge2m/chrome-firefox-openjdk8:$NOW jorge2m/chrome-firefox-jdk8-maven:latest
+        docker tag jorge2m/chrome-firefox-jdk8-maven:$NOW jorge2m/chrome-firefox-jdk8-maven:latest
     - name: Docker Push
       run: |
         docker push jorge2m/chrome-firefox-jdk8-maven:$NOW
