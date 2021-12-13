@@ -1,1 +1,1 @@
-# chrome-firefox-openjdk8
+# chrome-firefox-jdk8-maven
