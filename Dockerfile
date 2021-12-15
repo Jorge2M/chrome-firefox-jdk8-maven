@@ -5,6 +5,7 @@ RUN apt-get update -y \
 	&& apt-get install -y wget \
 	&& apt-get install -y gnupg2 \
 	&& apt-get -qqy dist-upgrade \
+	&& apt-get -y install curl \
 	&& apt-get -qqy install software-properties-common gettext-base unzip \
 	&& rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
@@ -25,19 +26,20 @@ RUN add-apt-repository ppa:ts.sch.gr/ppa \
 	&& rm /etc/java-8-openjdk/accessibility.properties
 
 #============
-# Maven 3.8.3
+# Maven
 #============
-RUN wget --no-verbose -O /tmp/apache-maven-3.8.3-bin.tar.gz http://www-eu.apache.org/dist/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz && \
-    tar xzf /tmp/apache-maven-3.8.3-bin.tar.gz -C /opt/ && \
-    ln -s /opt/apache-maven-3.8.3 /opt/maven && \
-    ln -s /opt/maven/bin/mvn /usr/local/bin  && \
-    rm -f /tmp/apache-maven-3.8.3-bin.tar.gz
+#RUN wget --no-verbose -O /tmp/apache-maven-3.8.3-bin.tar.gz http://www-eu.apache.org/dist/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz && \
+#    tar xzf /tmp/apache-maven-3.8.3-bin.tar.gz -C /opt/ && \
+#    ln -s /opt/apache-maven-3.8.3 /opt/maven && \
+#    ln -s /opt/maven/bin/mvn /usr/local/bin  && \
+#    rm -f /tmp/apache-maven-3.8.3-bin.tar.gz
+RUN apt-get install maven -y
 
 #=======
 # Chrome
 #=======
 #List of versions in https://www.ubuntuupdates.org/ppa/google_chrome
-ARG CHROME_VERSION=96.0.4664.93-1  
+ARG CHROME_VERSION=96.0.4664.110-1  
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
 	&& echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
 	&& apt-get update -qqy \
